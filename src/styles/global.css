@@ -426,3 +426,23 @@ html, body, #root {
   font-family: inherit; color: var(--text2); cursor: pointer; transition: all 0.2s;
 }
 .tab-btn.active { background: var(--surface); color: var(--accent); box-shadow: var(--shadow); }
+/* DARK MODE */
+[data-theme="dark"] {
+  --bg: #111110;
+  --surface: #1C1C1A;
+  --surface2: #252523;
+  --border: #2E2E2B;
+  --text: #F0EFE9;
+  --text2: #A8A7A2;
+  --text3: #6B6A65;
+  --accent: #4ADE80;
+  --accent-light: #1A3A2A;
+  --accent2: #F97316;
+  --accent2-light: #2A1A0A;
+  --warn: #EAB308;
+  --warn-light: #2A2000;
+  --danger: #F87171;
+  --danger-light: #2A1010;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+}

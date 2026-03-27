@@ -1,3 +1,4 @@
+/** @author Patrizia Danieli @copyright 2025 TerapiaApp — Tutti i diritti riservati */
 import { fmtDate, today, endDate, daysActive, daysRemaining, pillsPerDay, adherencePercent } from "./helpers";
 
 export function exportToPDF(user, drugs, doctor) {

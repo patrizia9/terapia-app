@@ -1,3 +1,4 @@
+/** @author Patrizia Danieli @copyright 2025 TerapiaApp — Tutti i diritti riservati */
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { Icon } from "../shared/Icons";

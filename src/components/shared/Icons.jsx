@@ -1,3 +1,4 @@
+/** @author Patrizia Danieli @copyright 2025 TerapiaApp — Tutti i diritti riservati */
 export const Icon = {
   pill: () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">

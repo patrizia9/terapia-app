@@ -1,3 +1,4 @@
+/** @author Patrizia Danieli @copyright 2025 TerapiaApp — Tutti i diritti riservati */
 import { Icon } from "../shared/Icons";
 import { fmtDate, endDate, daysActive, daysRemaining, pillsPerDay } from "../../utils/helpers";
 
@@ -21,11 +22,15 @@ export default function TherapyView({ drugs, onDelete }) {
         const cardClass = pct <= 20 ? "drug-card alert-danger" : pct <= 50 ? "drug-card alert-warn" : "drug-card";
 
         return (
-          <div key={d.id} className={cardClass}>
+          <div key={d.id} className={cardClass} style={{
+            borderLeft: `4px solid ${d.color || "var(--accent)"}`,
+          }}>
             <div className="drug-header">
               <div>
                 <div className="drug-name">{d.name}</div>
-                <div className="drug-dose">{d.dosage}</div>
+                <div className="drug-dose">
+                  {d.dosage} · {d.form === "compressa" ? "💊" : d.form === "sciroppo" ? "🍶" : d.form === "puntura" ? "💉" : d.form === "capsula" ? "🔴" : d.form === "gocce" ? "💧" : "🩹"} {d.form}
+                </div>
               </div>
               <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
                 <span className={`drug-badge ${badgeClass}`}>{badgeText}</span>
@@ -71,6 +76,18 @@ export default function TherapyView({ drugs, onDelete }) {
                 <div className="meta-label">fine terapia</div>
               </div>
             </div>
+
+            {/* NOTE PERSONALI */}
+            {d.notes && (
+              <div style={{
+                background: "var(--surface2)", borderRadius: 10,
+                padding: "10px 12px", fontSize: 13,
+                color: "var(--text2)", lineHeight: 1.5,
+              }}>
+                💬 {d.notes}
+              </div>
+            )}
+
           </div>
         );
       })}

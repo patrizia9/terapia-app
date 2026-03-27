@@ -1,3 +1,4 @@
+/** @author Patrizia Danieli @copyright 2025 TerapiaApp — Tutti i diritti riservati */
 export function today() {
   return new Date().toISOString().split("T")[0];
 }

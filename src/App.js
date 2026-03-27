@@ -1,5 +1,13 @@
+/**
+ * @file App.jsx — Componente principale TerapiaApp
+ * @author Patrizia Danieli
+ * @copyright 2025 Patrizia Danieli. Tutti i diritti riservati.
+ * @fingerprint PD-TERAPIAAPP-2025-v2-a8f3c9e1b7d2
+ */
 import { useState, useEffect } from "react";
 import "./styles/global.css";
+import { initTheme } from "./utils/theme";
+import { getLanguage } from "./utils/i18n";
 
 import { MOCK_DOCTOR } from "./data/mockData";
 import { stockAlert } from "./utils/helpers";
@@ -49,6 +57,8 @@ export default function App() {
   const [tab, setTab] = useState("home");
   const [showAdd, setShowAdd] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [theme, setTheme] = useState(() => initTheme());
+  const [lang, setLang] = useState(() => getLanguage());
 
   // Carica i dati dal database quando l'utente è loggato
   useEffect(() => {
@@ -100,18 +110,18 @@ export default function App() {
     }
   };
 
-  const handleRegister = async (name, email, password, dob) => {
-    try {
-      const res = await registerUser({ name, email, password, dob });
-      const { token, user } = res.data;
-      localStorage.setItem("tm_token", token);
-      localStorage.setItem("tm_user", JSON.stringify(user));
-      setUser(user);
-      return { success: true };
-    } catch (err) {
-      return { success: false, error: err.response?.data?.error || "Errore di connessione." };
-    }
-  };
+  const handleRegister = async (name, email, password, dob, secretQuestion, secretAnswer) => {
+  try {
+    const res = await registerUser({ name, email, password, dob, secretQuestion, secretAnswer });
+    const { token, user } = res.data;
+    localStorage.setItem("tm_token", token);
+    localStorage.setItem("tm_user", JSON.stringify(user));
+    setUser(user);
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: err.response?.data?.error || "Errore di connessione." };
+  }
+};
 
   const handleLogout = () => {
     setUser(null);
@@ -139,25 +149,28 @@ export default function App() {
     }
   };
 
-  const handleAdd = async (drug) => {
-    try {
-      await addDrug({
-        name: drug.name,
-        dosage: drug.dosage,
-        totalPills: drug.totalPills,
-        remainingPills: drug.remainingPills,
-        startDate: drug.startDate,
-        durationDays: drug.durationDays,
-        times: drug.times,
-      });
-      await loadDrugs();
-      if (Notification.permission === "granted") {
-        drug.times.forEach(t => scheduleNotification(drug, t));
-      }
-    } catch (err) {
-      console.error("Errore addDrug:", err);
+ const handleAdd = async (drug) => {
+  try {
+    await addDrug({
+      name: drug.name,
+      drugForm: drug.drugForm,
+      dosage: drug.dosage,
+      totalPills: drug.totalPills,
+      remainingPills: drug.remainingPills,
+      startDate: drug.startDate,
+      durationDays: drug.durationDays,
+      times: drug.times,
+      notes: drug.notes || null,
+      color: drug.color || "#2D6A4F",
+    });
+    await loadDrugs();
+    if (Notification.permission === "granted") {
+      drug.times.forEach(t => scheduleNotification(drug, t));
     }
-  };
+  } catch (err) {
+    console.error("Errore addDrug:", err);
+  }
+};
 
   const handleDelete = async (id) => {
     try {
@@ -225,21 +238,23 @@ export default function App() {
       </div>
 
       {/* CONTENUTO */}
-      <div className="scroll-content">
-        {tab === "home" && <DashboardView user={user} drugs={drugs} />}
-        {tab === "today" && <TodayView drugs={drugs} onTake={handleTake} />}
-        {tab === "therapy" && <TherapyView drugs={drugs} onDelete={handleDelete} />}
-        {tab === "charts" && <ChartsView drugs={drugs} />}
-        {tab === "profile" && (
-          <>
-            <DoctorView doctor={doctor} onSave={handleSaveDoctor} />
-            <ProfileView
-              user={user} drugs={drugs} doctor={doctor}
-              onLogout={handleLogout} onExportPDF={handleExportPDF}
-            />
-          </>
-        )}
-      </div>
+<div className="scroll-content">
+  {tab === "home" && <DashboardView user={user} drugs={drugs} />}
+  {tab === "today" && <TodayView drugs={drugs} onTake={handleTake} />}
+  {tab === "therapy" && <TherapyView drugs={drugs} onDelete={handleDelete} />}
+  {tab === "charts" && <ChartsView drugs={drugs} />}
+  {tab === "profile" && (
+    <>
+      <DoctorView doctor={doctor} onSave={handleSaveDoctor} />
+      <ProfileView
+        user={user} drugs={drugs} doctor={doctor}
+        onLogout={handleLogout} onExportPDF={handleExportPDF}
+        theme={theme} setTheme={setTheme}
+        lang={lang} setLang={setLang}
+      />
+    </>
+  )}
+</div>
 
       {/* BOTTOM NAV */}
       <nav className="bottom-nav">

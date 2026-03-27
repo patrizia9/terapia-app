@@ -1,0 +1,22 @@
+TERAPIAAPP — LICENZA PROPRIETARIA
+==================================
+
+Copyright © 2025 Patrizia Danieli
+Tutti i diritti riservati.
+
+Questo software e il relativo codice sorgente sono di proprietà
+esclusiva di Patrizia Danieli ("l'Autore").
+
+È VIETATO:
+- Copiare, modificare o distribuire il codice senza autorizzazione
+- Usare il software per scopi commerciali senza licenza
+- Rimuovere o alterare le note di copyright
+- Creare opere derivate senza permesso scritto
+
+FINGERPRINT DI IDENTIFICAZIONE:
+PD-TERAPIAAPP-2025-v2-a8f3c9e1b7d2
+
+Per autorizzazioni e licenze commerciali contattare l'autore.
+
+Legge applicabile: Legge italiana sul diritto d'autore
+(L. 22 aprile 1941 n. 633 e successive modifiche)

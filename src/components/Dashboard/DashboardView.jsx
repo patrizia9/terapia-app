@@ -1,3 +1,4 @@
+/** @author Patrizia Danieli @copyright 2025 TerapiaApp — Tutti i diritti riservati */
 import { Icon } from "../shared/Icons";
 import { fmtDate, today, pillsPerDay, stockAlert, adherencePercent } from "../../utils/helpers";
 

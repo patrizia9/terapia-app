@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// DOPO
-const BASE_URL = "https://terapia-backend.onrender.com/api";
+const BASE_URL = "http://localhost:5000/api";
 
 // Crea istanza axios
 const api = axios.create({
@@ -31,3 +30,8 @@ export const deleteDrug = (drugId) => api.delete(`/drugs/${drugId}`);
 // ── MEDICO ────────────────────────────
 export const getDoctor = () => api.get("/doctor");
 export const saveDoctor = (data) => api.post("/doctor", data);
+
+// ── RECUPERO CREDENZIALI ──────────────────
+export const getSecretQuestion = (data) => api.post("/auth/secret-question", data);
+export const verifySecretAnswer = (data) => api.post("/auth/verify-answer", data);
+export const resetPassword = (data) => api.post("/auth/reset-password", data);
